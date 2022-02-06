@@ -1,0 +1,22 @@
+version: "3.3"
+services:
+  subspace:
+   image: subspacecommunity/subspace:latest
+   container_name: subspace
+   volumes:
+    - /opt/docker/subspace:/data
+    - /opt/docker/dnsmasq:/etc/dnsmasq.d
+   restart: always
+   environment:
+    - SUBSPACE_HTTP_HOST=wg.orangevi.net
+    - SUBSPACE_LETSENCRYPT=true
+    - SUBSPACE_HTTP_INSECURE=false
+    - SUBSPACE_HTTP_ADDR=":80"
+    - SUBSPACE_NAMESERVERS=1.1.1.1
+    - SUBSPACE_LISTENPORT=51820
+    - SUBSPACE_IPV4_POOL=10.99.97.0/24
+    - SUBSPACE_IPV4_GW=10.99.97.1
+    - SUBSPACE_DISABLE_DNS=0
+   cap_add:
+    - NET_ADMIN
+   network_mode: "host"
